@@ -3,7 +3,7 @@ let bodyParser = require('body-parser')
 let request = require('request')
 let app = express()
 
-const CHANNEL_ACCESS_TOKEN = 'Your_Channel_Access_Token'
+const CHANNEL_ACCESS_TOKEN = '0+b8gIF7ktMcM1q9bzBHApWtQSxZ7SdA1ksFaS+V8Ls5mbl87plkS7NwV8ay5XJ8Ymzjrm0rNqIhnqhNdolKeTkZtrvQZzESJjIpJDp3SXlfuw4LoqFC7MKuNY8szE0gz1QoTgvBy0/8MIMFQVS/cQdB04t89/1O/w1cDnyilFU='
 const PORT = process.env.PORT || 3000
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -14,6 +14,12 @@ app.listen(PORT, function () {
 
 // handler receiving messages
 app.post('/', function (req, res) {
+    let body = req.body;
+    let text = body.events[0].message.text
+    let replyToken = body.events[0].replyToken
+    sendMessage(replyToken, text);
+    console.log(JSON.stringify(body, null, 2));
+    res.send('');
 })
 
 // generic function sending messages
