@@ -17,11 +17,7 @@ app.post('/', function (req, res) {
     let body = req.body;
     let text = body.events[0].message.text
     let replyToken = body.events[0].replyToken
-    if(text == "我愛你"){
-        sendMessage(replyToken, "我不愛你"); 
-    }else{
-        sendMessage(replyToken, text);     
-    }
+    sendMessage(replyToken, text);     
     console.log(JSON.stringify(body, null, 2));
     res.send('');
 })
